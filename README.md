@@ -10,6 +10,9 @@ of those just failed.
 - [Gem release, PR-based flow](skills/gem-release-pr-flow.md) — how a
   Ruby gem release travels through a release pull request, why it does,
   and what to do when a step misbehaves.
+- [The first-time-contributor CI hold](skills/first-time-contributor-ci-hold.md) —
+  why a first-time contributor's tests wait for an approval click, and
+  what the maintainer does about it.
 
 ## Conventions these skills assume
 
