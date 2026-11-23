@@ -22,7 +22,7 @@ a first-time contributor's CI definition changes could execute
 arbitrary code on the repository's runners. The approval is a human
 attestation that the pull request is safe to build. It applies to
 workflows only — checks produced by GitHub Apps (like `cla/ribose`)
-run regardless, which is why the CLA check is green while the tests
+run regardless, which is why the CLA check evaluates while the tests
 wait.
 
 ## What the maintainer does
@@ -39,11 +39,21 @@ disable the requirement on public repositories.
 `cla/ribose` is produced by the Ribose CLA App from a signed webhook
 delivery, so signature evaluation never waits for the approval — a
 first-time contributor's CLA status is visible immediately, and the
-sweep flips the check green within minutes of a signature landing.
+sweep flips the check green within one sweep tick (five minutes) of a
+signature landing. That wait is a different thing from this hold, and
+it has its own guide: [The CLA check after a
+signature](cla-check-after-signature.md).
 
 ## Where this bit for real
 
-rnpgp/rnp#2587 (2026-11-19): the contributor signed, the CLA went
-green, but the test matrix waited for the approval click — and the
-combination read as "the CLA is broken" to everyone watching. The CLA
-was fine; the tests were held; one approval click resolved it.
+rnpgp/rnp#2587 (2026-11-19) showed both holds at once, and they read
+as one broken thing. The contributor signed the ICLA at 16:48, but the
+`cla/ribose` check stayed red until 22:30, when a maintainer reopened
+the pull request and the re-evaluation turned it green — five hours
+and forty-two minutes, for a sweep that should have taken one tick.
+The test matrix sat in the Actions tab waiting for the approval click
+throughout. Two independent holds, one incident: the sweep was too
+slow (a defect in the App, fixed in
+[riboseinc/cla#133](https://github.com/riboseinc/cla/pull/133)), and
+the CI hold was GitHub's first-time-contributor gate doing its job.
+One click resolved the tests; the reopen resolved the check.

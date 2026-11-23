@@ -13,6 +13,9 @@ of those just failed.
 - [The first-time-contributor CI hold](skills/first-time-contributor-ci-hold.md) —
   why a first-time contributor's tests wait for an approval click, and
   what the maintainer does about it.
+- [The CLA check after a signature](skills/cla-check-after-signature.md) —
+  why a signed contributor's `cla/ribose` check turns green by itself
+  within minutes, and what to do when it does not.
 
 ## Conventions these skills assume
 
